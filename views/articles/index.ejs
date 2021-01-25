@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Code share</title>
+</head>
+
+<script>
+    function CopyToClipboard(containerid) {
+    if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+        }
+    }
+
+</script>
+
+
+<body>
+    <div class="div-1">
+    <div class="container div-1">
+        <h1 class="mb-4">code share</h1>
+        <a href="/articles/new" class="btn btn-primary ">
+           +  New Code
+        </a>
+        <% articles.forEach(article =>{ %>
+        <div class="card mt-4 div-2">
+            <div class="card-body">
+                <h4 class="card-title"><%= article.title %></h4>
+                <button id="button1" class="btn btn-success" onclick="CopyToClipboard('div1')">Click to copy</button>
+                <br /><br />
+                <div class="card-text mb-2"><%= article.description %></div>
+                <div class="card-text mb-2" id="div1"><pre><%= article.markdown %></pre></div>
+               
+                <a href="articles/edit/<%= article.id %>" class="btn btn-primary">Edit Code</a>
+                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+</div>
+</body>
+
+</html>
