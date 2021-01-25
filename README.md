@@ -9,8 +9,7 @@ module.exports = {
 ```
 </br>
 then do this</br>
-```
+<pre>
 npm install </br>
 node index.js
-
-```
+<pre/>
